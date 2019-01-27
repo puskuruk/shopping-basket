@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware,compose} from 'redux';
 import {Provider} from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import Reducers from './reducers/index';
@@ -7,7 +7,9 @@ import ProductList from './components/productList';
 import Basket from './components/basket';
 import './App.css';
 
-const store = createStore(Reducers, applyMiddleware(ReduxThunk));
+const store = createStore(Reducers, 
+  compose(applyMiddleware(ReduxThunk),window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+  );
 
 class App extends Component {
   constructor(props) {
